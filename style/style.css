@@ -1,0 +1,82 @@
+@font-face {
+    font-family: hed;
+    src: url("../font/Righteous-Regular.ttf");
+}
+
+body{
+    font-family: hed;
+    color: black;
+    text-align: center;
+}
+
+img{
+    width: 50px;
+    height: 50px;
+}
+
+.GG{
+    font-size: 20px;
+    font-weight: bold;
+    color:black;
+    width: 50px;
+    height: 50px;
+    background-color: transparent;
+    border-color: transparent;
+}
+
+h1{
+    font-weight: bold;
+    text-align: center;
+}
+
+button{
+    background-color: transparent;
+    border-color: transparent;
+}
+
+.up{
+    transform: rotate(270deg);
+}
+
+.left{
+    transform: rotate(180deg);
+    padding: 0% 4%;
+}
+
+.right{
+    padding: 0% 4%;
+}
+
+.down{
+    transform: rotate(90deg);
+}
+
+
+
+canvas{
+    border: 3px solid;
+    border-color: black;
+    margin-bottom: 2%;
+    box-shadow: 1px 5px 10px rgba(0, 0, 0, 0.2);
+}
+/*
+@media (max-width: 767px)
+{
+    button{
+        display: block;
+        background-color: transparent;
+        border-color: transparent;
+    }
+
+    canvas{
+        width: 300px;
+        height: 300px;
+    }    
+
+    img{
+        width: 50px;
+        height: 50px;
+    }
+
+    
+}*/

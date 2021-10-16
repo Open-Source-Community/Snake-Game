@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Snake Game</title>
+    <link rel="stylesheet" href="./style/bootstrap.min.css">
+    <link rel="stylesheet" href="./style/style.css">
+</head>
+
+<body>
+    
+    <div class="header">
+        <div class="container-fluid">
+            <h1>Snake Game</h1>      
+        </div>
+    </div>
+    <canvas class="col-lg-12 col-xs-12" id="id" width="500" height="500" style="max-width: 500px; max-height: 500px;"></canvas>
+    <div class="arrows">
+        <div class="container-fluid">
+            <div class="upper">
+                <button class="up"><img src="./Image/arrow.png" alt="" onclick="moveU()"></button>
+            </div>
+            <div class="mid">
+                <button class="left"><img src="./Image/arrow.png" alt="" onclick="moveL()"></button>
+                <input type="button" value="GG" class="GG" onclick="location.reload()">
+                <button class="right"><img src="./Image/arrow.png" alt="" onclick="moveR()"></button>
+            </div>
+            <div class="lower">
+                <button class="down"><img src="./Image/arrow.png" alt="" onclick="moveD()"></button>
+            </div>
+        </div>
+    </div>
+    
+
+    <script src="./script/bootstrap.min.js"></script>
+    <script src="./script/js.js">
+    </script>
+
+</body>
+
+</html>
+
+<!--
+    <div class="mobile">
+                <div class="container">
+                <div class="row">
+                    <div class="upper">
+                        <button class="down"><img src="./Image/arrow.png" alt="" onclick="moveU()"></button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="mid">
+                        <button class="right"><img src="./Image/arrow.png" alt="" onclick="moveR()"></button>
+                        <button class="left"><img src="./Image/arrow.png" alt="" onclick="moveL()"></button>
+                    </div>
+                </div>
+                    <div class="down">
+                        <button class="up"><img src="./Image/arrow.png" alt="" onclick="moveD()"></button>
+                    </div>
+                </div>     
+            </div>
+-->
