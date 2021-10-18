@@ -2,8 +2,8 @@
 
 ### [LIVE WEBSITE](https://open-source-community.github.io/Snake-Game/)
 
-Snake game is the traditional snake game written in js.
+- Snake game is the traditional snake game written in js.
 
 ## Screenshots
-![](images/img1)
-![](images/img2)
+![](Readme-images/img1.png)
+![game over](Readme-images/img2.png)
