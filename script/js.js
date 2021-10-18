@@ -19,6 +19,8 @@ let food_y;
 
 var score=0;
 
+const button = document.getElementById("buttonReload");
+
 const board = document.getElementById("id");
 const snakeboard_ctx = board.getContext("2d");
 
@@ -26,6 +28,7 @@ main();
 gen_food();
 
 document.addEventListener("keydown", change_direction);
+document.addEventListener("click", handleClick);
 
 //logic
 
@@ -89,29 +92,69 @@ function move_snake() {
      
 }
 
-function gameOver(){
-     let over=false;
-     if(snake[0].x<=0 || snake[0].y<=0 || snake[0].x>board.width-40 || snake[0].y>board.height-40)
-     {
-          over=true;
-          snakeboard_ctx.fillStyle="black";
-          snakeboard_ctx.font= "70px hed";
-          snakeboard_ctx.fillText("Game Over",75,250);
+function gameOver() {
+     let over = false;
+     if (
+       snake[0].x <= 0 ||
+       snake[0].y <= 0 ||
+       snake[0].x > board.width - 40 ||
+       snake[0].y > board.height - 40
+     ) {
+       over = true;
+       showGameover();
      }
-     
-     for(var i=1;i<snake.length-1;i++){
-          var tmp=snake[i];
-          if(tmp.x === snake[0].x && tmp.y === snake[0].y){
-               over=true;
-               snakeboard_ctx.fillStyle="black";
-               snakeboard_ctx.font= "70px hed";
-               snakeboard_ctx.fillText("Game Over",75,250);     
-               break;
-          }
+   
+     for (var i = 1; i < snake.length - 1; i++) {
+       var tmp = snake[i];
+       if (tmp.x === snake[0].x && tmp.y === snake[0].y) {
+         over = true;
+         showGameover();
+         break;
+       }
      }
-     
+   
      return over;
-}
+   }
+
+function handleClick(e) {
+     const x = e.clientX - board.offsetLeft;
+     const y = e.clientY - board.offsetTop;
+     if (snakeboard_ctx.isPointInPath(x, y)) {
+       button.focus();
+       location.reload();
+     }
+   }
+   
+   function showGameover() {
+     snakeboard_ctx.fillStyle = "black";
+     snakeboard_ctx.font = "70px hed";
+     snakeboard_ctx.fillText("Game Over", 75, 250);
+     drawButton(button, board.width / 2 - 75, 300);
+   }
+   
+   function drawButton(el, x, y) {
+     const active = document.activeElement === el;
+     const width = 150;
+     const height = 40;
+   
+     // Button background
+     snakeboard_ctx.fillStyle = "transparent";
+     snakeboard_ctx.fillRect(x, y, width, height);
+   
+     // Button text
+     snakeboard_ctx.font = "40px hed";
+     snakeboard_ctx.textAlign = "center";
+     snakeboard_ctx.textBaseline = "middle";
+     snakeboard_ctx.fillStyle = active ? "blue" : "black";
+     snakeboard_ctx.fillText(el.textContent, x + width / 2, y + height / 2);
+   
+     // Define clickable area
+     snakeboard_ctx.beginPath();
+     snakeboard_ctx.rect(x, y, width, height);
+   
+     // Draw focus ring, if appropriate
+     snakeboard_ctx.drawFocusIfNeeded(el);
+   }
 
 function change_direction(event) {
      const leftKey = 37;
