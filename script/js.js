@@ -19,12 +19,18 @@ let food_y;
 
 var score=0;
 
+const buttons = {};
 const board = document.getElementById("id");
 const snakeboard_ctx = board.getContext("2d");
 
 load()
 
 document.addEventListener("keydown", change_direction);
+
+
+for (const element of document.querySelectorAll('button')) {
+     buttons[element.classList[0]] = element
+}
 
 //logic
 function load() {
@@ -146,40 +152,40 @@ function change_direction(event) {
      const left = dx === -20;
      
      if (keyPressed === leftKey && !right) {
-          dx = -20;
-          dy = 0;
+          moveL()
      }
      if (keyPressed === upKey && !down) {
-          dx = 0;
-          dy = -20;
+          moveU()
      }
      if (keyPressed === rightKey && !left) {
-          dx = 20;
-          dy = 0;
+          moveR()
      }
      if (keyPressed === downKey && !up) {
-          dx = 0;
-          dy = 20;
+          moveD()
      }
 }
 
 
-function moveU(){
+function moveU() {
+     setActive('up');
      dx=0;
      dy=-20;
 }
 
-function moveD(){
+function moveD() {
+     setActive('down');
      dx = 0;
      dy = 20;
 }
 
 function moveR(){
+     setActive('right');
      dx = 20;
      dy = 0;
 }
 
 function moveL(){
+     setActive('left');
      dx=-20;
      dy=0;
 }
@@ -214,4 +220,11 @@ function drawScore(){
      snakeboard_ctx.fillStyle="black";
      snakeboard_ctx.font= "20px hed";
      snakeboard_ctx.fillText("Score: "+score ,10,20);
+}
+
+function setActive(btn) {
+     for (const [button, element] of Object.entries(buttons)) {
+          if (btn == button) element.classList.add('active')
+          else element.classList.remove('active')
+     }
 }
