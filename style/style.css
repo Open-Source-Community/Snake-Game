@@ -35,13 +35,20 @@ button{
     border-color: transparent;
 }
 
+.arrows > * {
+    width: 100%;
+}
+
+.mid {
+    display: flex;
+    flex-direction: row;
+}
 .up{
     transform: rotate(270deg);
 }
 
 .left{
     transform: rotate(180deg);
-    padding: 0% 4%;
 }
 
 .right{
@@ -52,8 +59,20 @@ button{
     transform: rotate(90deg);
 }
 
-
-
+.arrows {
+    margin-left: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-self: center;
+    padding: 1rem;
+}
+#container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
 canvas{
     border: 3px solid;
     border-color: black;

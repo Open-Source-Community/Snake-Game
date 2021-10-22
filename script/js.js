@@ -22,13 +22,30 @@ var score=0;
 const board = document.getElementById("id");
 const snakeboard_ctx = board.getContext("2d");
 
-main();
-gen_food();
+load()
 
 document.addEventListener("keydown", change_direction);
 
 //logic
-
+function load() {
+     snake = [
+          { x: 200, y: 200 },
+     ];
+     
+     
+     changing_direction = false;
+     
+     
+     dx = 20;
+     dy = 0;
+     
+     food_x;
+     food_y;
+     
+     score = 0;
+     main();
+     gen_food();
+}
 function main() {
      var res=gameOver();
      if(res)
