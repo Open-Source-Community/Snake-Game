@@ -22,6 +22,7 @@ var score = 0;
 const buttons = {};
 const board = document.getElementById("id");
 const snakeboard_ctx = board.getContext("2d");
+const retryButton = document.getElementById('retryButton');
 
 load()
 
@@ -52,6 +53,8 @@ function load() {
      main();
      genFood();
      setHighScore();
+     retryButton.style.display = 'none';
+
 }
 function main() {
      var res = gameOver();
@@ -115,23 +118,22 @@ function gameOver() {
      let over = false;
      if (snake[0].x <= 0 || snake[0].y <= 0 || snake[0].x > board.width - 40 || snake[0].y > board.height - 40) {
           over = true;
-          snakeboard_ctx.fillStyle = "black";
-          snakeboard_ctx.font = "70px hed";
-          snakeboard_ctx.fillText("Game Over", 75, 250);
      }
 
      for (var i = 1; i < snake.length - 1; i++) {
           var tmp = snake[i];
           if (tmp.x === snake[0].x && tmp.y === snake[0].y) {
                over = true;
-               snakeboard_ctx.fillStyle = "black";
-               snakeboard_ctx.font = "70px hed";
-               snakeboard_ctx.fillText("Game Over", 75, 250);
                break;
           }
      }
-     if (over) setHighScore(score); // Update the high score to new high score if achieved.
-
+     if (over) {
+          snakeboard_ctx.fillStyle = "black";
+          snakeboard_ctx.font = "70px hed";
+          snakeboard_ctx.fillText("Game Over", 75, 250);
+          setHighScore(score); // Update the high score to new high score if achieved.
+          retryButton.style.display = 'block';
+     }
      return over;
 }
 
@@ -228,17 +230,10 @@ function setActive(btn) {
      }
 }
 
-function setHighScore(currentScore = -1) {
-     let fetchedScore = localStorage.getItem("highScore");
-
-     if (typeof fetchedScore === null) {
-          fetchedScore = 0;
-     }
-     else {
-          fetchedScore = Number(fetchedScore);
-     }
+function setHighScore() {
+     let fetchedScore = Number(localStorage.getItem("highScore")) || 0;
      let highscore = document.getElementById("high-score");
-     fetchedScore = Math.max(fetchedScore, currentScore);
+     fetchedScore = Math.max(fetchedScore, score) || 0;
      highscore.textContent = fetchedScore;
      localStorage.setItem("highScore", fetchedScore);
 }

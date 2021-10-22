@@ -91,6 +91,12 @@ canvas{
 .active {
     background-color: aqua;
 }
+
+#retryButton {
+    position: absolute;
+    transform: translate(calc(250px - 50%), -250px);
+
+}
 /*
 @media (max-width: 767px)
 {
