@@ -51,42 +51,43 @@ function load() {
      score = 0;
      main();
      gen_food();
+     setHighScore();
 }
 function main() {
      var res=gameOver();
      if(res)
           return;
-     
-     
+
+
      changing_direction = false;
      clearCanvas();
      drawFood();
      move_snake();
      drawSnake();
      drawScore();
-     
+
      setTimeout(main,100);
 }
 
 function clearCanvas() {
      
      snakeboard_ctx.fillStyle = board_background;
-     
+
      snakeboard_ctx.strokestyle = board_border;
-     
+
      snakeboard_ctx.fillRect(0, 0, board.width, board.height);
-     
+
      snakeboard_ctx.strokeRect(0, 0, board.width, board.height);
 }
 
 
 function random_food(min, max)
-{  
+{
      return Math.round((Math.random() * (max-min) + min) / 20) * 20;
 }
 
-function gen_food() 
-{  
+function gen_food()
+{
      food_x = random_food(0, board.width - 50);
      food_y = random_food(0, board.height - 50);
      snake.forEach(function has_snake_eaten_food(part) {
@@ -97,19 +98,20 @@ function gen_food()
 
 function move_snake() {
      const head = { x: snake[0].x + dx, y: snake[0].y + dy };
-     
+
      snake.unshift(head);
-     
+
      const has_eaten_food = snake[0].x === food_x && snake[0].y === food_y;
-     
+
      if (has_eaten_food) {
           gen_food();
           score+=10;
+          setHighScore(score); // Update the high score to new high score if achieved.
      }
      else {
           snake.pop();
      }
-     
+
 }
 
 function gameOver(){
@@ -121,18 +123,18 @@ function gameOver(){
           snakeboard_ctx.font= "70px hed";
           snakeboard_ctx.fillText("Game Over",75,250);
      }
-     
+
      for(var i=1;i<snake.length-1;i++){
           var tmp=snake[i];
           if(tmp.x === snake[0].x && tmp.y === snake[0].y){
                over=true;
                snakeboard_ctx.fillStyle="black";
                snakeboard_ctx.font= "70px hed";
-               snakeboard_ctx.fillText("Game Over",75,250);     
+               snakeboard_ctx.fillText("Game Over",75,250);
                break;
           }
      }
-     
+
      return over;
 }
 
@@ -141,16 +143,16 @@ function change_direction(event) {
      const rightKey = 39;
      const upKey = 38;
      const downKey = 40;
-     
+
      if (changing_direction) return;
-     
+
      changing_direction = true;
      const keyPressed = event.keyCode;
      const up = dy === -20;
      const down = dy === 20;
      const right = dx === 20;
      const left = dx === -20;
-     
+
      if (keyPressed === leftKey && !right) {
           moveL()
      }
@@ -193,7 +195,7 @@ function moveL(){
 //design
 
 function drawFood() {
-     
+
      snakeboard_ctx.fillStyle = '#C84B31';
      snakeboard_ctx.strokestyle = '#C84B31';
      snakeboard_ctx.fillRect(food_x, food_y, 20, 20);
@@ -202,13 +204,13 @@ function drawFood() {
 
 function drawSnakePart(snakePart) {
      // snakeboard_ctx .roundRect(snakePart.x, snakePart.y, 200, 200, 20);
-     
+
      snakeboard_ctx.fillStyle = snake_col;
-     
+
      //snakeboard_ctx.strokestyle = snake_border;
-     
+
      snakeboard_ctx.fillRect(snakePart.x, snakePart.y, 20, 20);
-     
+
      //snakeboard_ctx.strokeRect(snakePart.x, snakePart.y, 20, 20);
 }
 
@@ -227,4 +229,17 @@ function setActive(btn) {
           if (btn == button) element.classList.add('active')
           else element.classList.remove('active')
      }
+function setHighScore (currentScore=-1){
+     let fetchedScore= localStorage.getItem("highScore");
+
+     if(typeof fetchedScore === null){
+          fetchedScore=0;
+     }
+     else{
+          fetchedScore=Number(fetchedScore);
+     }
+     let highscore= document.getElementById("high-score");
+     fetchedScore=Math.max(fetchedScore,currentScore);
+     highscore.textContent=fetchedScore;
+     localStorage.setItem("highScore",fetchedScore);
 }
